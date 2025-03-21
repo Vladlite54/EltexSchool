@@ -1,0 +1,60 @@
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa root@172.16.9.184
+Ключ на сервере 1: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB...
+Ключ на сервере 2: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB...
+На сервере 2:
+root@eltex-practice2-pg1-v10:~# useradd -m -s /bin/bash user1
+root@eltex-practice2-pg1-v10:~# passwd user1
+adduser user2
+adduser user3
+usermod -s /usr/sbin/nologin user3
+su user3
+su -s /bin/bash user3
+groupadd testgroup
+usermod -a -G testgroup user1
+usermod -a -G testgroup user2
+usermod -a -G testgroup user3
+root@eltex-practice2-pg1-v10:/opt# chown .testgroup share
+chmod g+s share
+В файле .profile для user1 umask 022 был заменен на umask 026
+user1@eltex-practice2-pg1-v10:~$ touch /opt/share/user1file1.txt
+user1@eltex-practice2-pg1-v10:~$ touch /opt/share/user1file2.txt
+user2@eltex-practice2-pg1-v10:~$ touch /opt/share/user2file1.txt
+user2@eltex-practice2-pg1-v10:~$ touch /opt/share/user2file2.txt
+user3@eltex-practice2-pg1-v10:~$ touch /opt/share/user3file1.txt
+user3@eltex-practice2-pg1-v10:~$ touch /opt/share/user3file2.txt
+За каждого пользователя попытаемся удалить файлы: удаление прошло успешно
+Установим sticky bit:
+chmod +t /opt/share/
+После этого стирать чужие файлы не удастся
+Для установки sudo для команды dmesg для user1 добавим в /etc/sudoers строку: user1 ALL=(ALL) /usr/bin/dmesg
+Для user2: # скрипт не удается выполнить
+root@eltex-practice2-pg1-v10:/opt# touch dmesg_scrip.sh
+root@eltex-practice2-pg1-v10:/opt# chmod +x dmesg_scrip.sh 
+root@eltex-practice2-pg1-v10:/opt# vi dmesg_scrip.sh - в скрипте пропишем строку sudo /usr/bin/bash
+chmod u+s dmesg_scrip.sh
+Далее с п14:
+chage -M 10 user1
+chage -M 10 user2
+chage -M 10 user3
+vim /etc/motd
+mkdir /root/etc_backup
+rsync -avzh /etc/ /root/etc_backup/
+tar czf etc_backup.tar.gz etc_backup
+tar cjf etc_backup.tar.gz etc_backup
+7z a etc_backup.7z etc_backup
+ls -l - bzip сжал архив сильнее
+vi /etc/motd
+rsync -azh /etc/ /root/etc_backup
+gunzip etc_backup.tar.gz - в сжатые архивы нельзя добавить файл, поэтому расжимаем
+tar -rvf etc_backup.tar /etc/motd - добавить новый файл в архив
+gzip etc_backup.tar - сжимаем обратно
+tar -dvf etc_backup.tar.bz2 -C etc_backup
+tar xf etc_backup.tar.gz -C ./etc_backup_gzip/
+7z x etc_backup.7z -o./etc_backup_7zip/
+diff ./etc_backup_gzip/etc_backup/motd ./etc_backup_7zip/etc_backup/motd
+Результат сравнения:
+1c1
+< Кровин Владислав 20.03.2025 21:21
+---
+> Кровин Владислав

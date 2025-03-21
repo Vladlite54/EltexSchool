@@ -1,0 +1,42 @@
+ssh-keygen -t ed25519 -f ~/.ssh/vladlite54
+vladlite@vladlite-pc:~$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? SSH
+? Upload your SSH public key to your GitHub account? /home/vladlite/.ssh/vladlite54.pub
+? Title for your SSH key: eltex-practice2-pgX-vY
+? How would you like to authenticate GitHub CLI? Login with a web browser
+gh auth setup-git --hostname github.com
+gh repo create --public название_репозитория
+mkdir EltexSchool && cd EltexSchool
+echo "# Repo for Eltex School" >> README.md
+git init
+git add README.md
+git branch -M main
+git remote add origin https://github.com/Vladlite54/EltexSchool.git
+git status
+git push -u origin main
+mkdir -p Module1/Practice1
+mkdir Module1/Practice2/init.txt
+mkdir Module1/Practice3
+По scp были переданы файлы 1 практики и добавлены в папку с репозиторием
+git add -A
+git commit -m "Practice1"
+mkdir ~/EltexSchool_clone && cd ~/EltexShool_clone
+git clone https://github.com/Vladlite54/EltexSchool.git
+В основном:
+mv init.txt init2.txt
+git add -A
+git commit -m "some chage"
+git push
+В клоне:
+git fetch
+git log origin/main
+git diff main origin/main
+diff --git a/Module1/Practice2/init.txt b/Module1/Practice2/init2.txt
+similarity index 100%
+rename from Module1/Practice2/init.txt
+rename to Module1/Practice2/init2.txt
+git merge
+По scp были переданы файлы 2 практики и добавлены в папку с репозиторием
+git add -A
+git commit -m "Practice2"
