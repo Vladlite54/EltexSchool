@@ -1,0 +1,13 @@
+mkdir -p D1/D2/D3
+touch ~/D1/D2/file.txt
+vim ./D1/D2/file.txt
+ln ./D1/D2/file.txt ./D1/D2/D3/fileH && echo
+ln -s ./D1/D2/file.txt ./D1/D2/D3/fileH && echo
+mv file.txt ~/D1
+Рабочей оказалась жесткая ссылка, так как она имеет тот же индексный дескриптор, что и изначальный файл. Символическая ссылка указывает на конкретное расположение файла в определенной директории. Так как файл был перемещен в другую директорию, символическая ссылка не может обратиться к нему по старому пути
+rm -R D2
+find ~ -type f -mtime -1
+whereis find
+file /usr/bin/find
+file /boot/initrd.img*
+find / -size +30M >> eltex-pg1-v10part3_gt30MB.log

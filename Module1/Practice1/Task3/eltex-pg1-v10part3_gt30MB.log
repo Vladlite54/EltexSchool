@@ -1,0 +1,9 @@
+/proc/kcore
+/home/eltex-pg2-v23/eltex-pg2-v23_part.log
+/boot/initrd.img-6.1.0-31-amd64
+/boot/initrd.img-6.1.0-27-amd64
+/var/cache/apt/srcpkgcache.bin
+/var/cache/apt/pkgcache.bin
+/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages
+/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_source_Sources
+/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_i18n_Translation-en
