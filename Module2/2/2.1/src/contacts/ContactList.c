@@ -1,6 +1,6 @@
 #include "ContactList.h"
 
-// Создать новый контакт
+// РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ РєРѕРЅС‚Р°РєС‚
 Contact createContact(int id, const char *name, const char *surname, const char *phone) {
     Contact newContact;
     newContact.id = id;
@@ -13,28 +13,28 @@ Contact createContact(int id, const char *name, const char *surname, const char 
     return newContact;
 }
 
-// Изменить имя
+// РР·РјРµРЅРёС‚СЊ РёРјСЏ
 void editName(Contact *contact, const char *name) {
     free(contact->name);
     contact->name = (char*)malloc(sizeof(char) * strlen(name));
     strcpy(contact->name, name);
 }
 
-// Изменить фамилию
+// РР·РјРµРЅРёС‚СЊ С„Р°РјРёР»РёСЋ
 void editSurname(Contact *contact, const char *surname) {
     free(contact->surname);
     contact->surname = (char*)malloc(sizeof(char) * strlen(surname));
     strcpy(contact->surname, surname);
 }
 
-// Изменить номер телефона
+// РР·РјРµРЅРёС‚СЊ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°
 void editPhone(Contact *contact, const char *phone) {
     free(contact->phone);
     contact->phone = (char*)malloc(sizeof(char) * strlen(phone));
     strcpy(contact->phone, phone);
 }
 
-// Создать новый пустой список контактов
+// РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ РїСѓСЃС‚РѕР№ СЃРїРёСЃРѕРє РєРѕРЅС‚Р°РєС‚РѕРІ
 ContactList createContactList() {
     ContactList newList;
     newList.list = NULL;
@@ -42,7 +42,7 @@ ContactList createContactList() {
     return newList;
 }
 
-// Добавить контакт
+// Р”РѕР±Р°РІРёС‚СЊ РєРѕРЅС‚Р°РєС‚
 void addContact(ContactList *contacts, Contact contact) {
     if (contacts->list == NULL) {
         contacts->size = 1;
@@ -61,7 +61,7 @@ void addContact(ContactList *contacts, Contact contact) {
     }
 }
 
-// Удалить контакт по id
+// РЈРґР°Р»РёС‚СЊ РєРѕРЅС‚Р°РєС‚ РїРѕ id
 int deleteContact(ContactList *contacts, int id) {
     int position = findPositionById(contacts, id);
     if (position == -1) return -1;
@@ -77,7 +77,7 @@ int deleteContact(ContactList *contacts, int id) {
     return 0;
 }
 
-// Найти контакт по id
+// РќР°Р№С‚Рё РєРѕРЅС‚Р°РєС‚ РїРѕ id
 Contact *findById(const ContactList *contacts, int id) {
     for (size_t i = 0; i < contacts->size; ++i) {
         if (contacts->list[i].id == id) return &contacts->list[i];
@@ -85,7 +85,7 @@ Contact *findById(const ContactList *contacts, int id) {
     return NULL;
 }
 
-// Найти позицию в списке по id 
+// РќР°Р№С‚Рё РїРѕР·РёС†РёСЋ РІ СЃРїРёСЃРєРµ РїРѕ id 
 int findPositionById(const ContactList *contacts, int id) {
     for (size_t i = 0; i < contacts->size; ++i) {
         if (contacts->list[i].id == id) return i;
