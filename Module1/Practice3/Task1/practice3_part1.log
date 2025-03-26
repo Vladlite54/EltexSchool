@@ -1,0 +1,37 @@
+1) su - user1
+2) ps -eLo pid,nlwp | awk '$2 > 1' | wc -l
+42
+3) top (далее манипуляции через внутренний интерфейс)
+4) passwd
+5) В окне top:
+Нажать u, ввести имя пользователя user1
+Найти id процесса с командой passwd
+kill -15 41670
+kill -2 41670
+kill -3 41670
+kill -9 41670
+6) vim ~/file_task3.txt нажать Ctrl-Z
+[1]+  Stopped                 vim ~/file_task3.txt
+7) sleep 600
+Ctrl-Z
+jobs
+[1]-  Stopped                 vim ~/file_task3.txt
+[2]+  Stopped                 sleep 600
+8) bg %2
+[2]+ sleep 600 &
+9)renice 10 41725
+41725 (process ID) old priority 0, new priority 10
+10) ps -l
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1001   41725   41670  0  90  10 -  1421 do_sys pts/3    00:00:00 sleep
+11) vim ~/file_task3.txt
+12) kill -15 %2
+jobs
+[1]+  Stopped                 vim ~/file_task3.txt
+[2]-  Terminated              sleep 600
+13) trap 'echo "Меня голыми руками не возьмёшь!"' SIGINT SIGQUIT
+Ctrl+C
+Ctrk+\\
+Меня голыми руками не возьмёшь!$ ^C
+
+Меня голыми руками не возьмёшь!$ ^\

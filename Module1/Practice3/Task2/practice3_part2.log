@@ -1,0 +1,17 @@
+touch template_task.sh
+chmod 700 template_task.sh
+
+touch observer.sh
+chmod 700 observer.sh
+
+touch scripts.conf
+
+crontab -e
+
+* * * * * ~/observer.sh
+cp template_task.sh task1
+cp template_task.sh task2
+cp template_task.sh task3
+chmod 700 task1.sh task2.sh task3.sh
+
+nano scripts.conf
