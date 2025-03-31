@@ -1,5 +1,6 @@
 #include "List.h"
 
+// Создать узел списка
 Node *createNode(Contact contact) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->value = contact;
@@ -7,6 +8,7 @@ Node *createNode(Contact contact) {
     return newNode;
 }
 
+// Создать новый пустой список
 List* createList() {
     List* newList = (List*)malloc(sizeof(List));
     newList->size = 0;
@@ -14,6 +16,7 @@ List* createList() {
     return newList;
 }
 
+// Добавить элемент в список с сохранение порядка
 void pushToList(List *list, Contact contact) {
     Node* item = createNode(contact);
     if (list->head == NULL) {
@@ -51,6 +54,7 @@ void pushToList(List *list, Contact contact) {
     }
 }
 
+// Удалить элемент из списка по id
 int deleteFromListById(List *list, int id) {
     if (list->head->value.id == id) {
         Node* toDelete = list->head;
@@ -83,19 +87,10 @@ int deleteFromListById(List *list, int id) {
     return -1;
 }
 
+// Найти элемент по ID
 Contact *findById(const List *list, int id) {
     for (Node* current = list->head; current != NULL; current = current->next) {
         if (current->value.id == id) return &current->value;
     }
     return NULL;
-}
-
-void printList(List* list) {
-    for (Node* current = list->head; current != NULL; current = current->next) {
-        printf("Id: %d\t Name: %s\t Surname: %s\t Phone: %s\n",
-            current->value.id,
-            current->value.name,
-            current->value.surname,
-            current->value.phone);
-    }
 }

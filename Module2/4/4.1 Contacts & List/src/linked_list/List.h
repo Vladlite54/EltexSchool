@@ -13,15 +13,13 @@ typedef struct Node {   // узел списка
 
 Node* createNode(Contact contact); // создать узел
 
-typedef struct List {
+typedef struct List {   // структура списка
     size_t size;
     Node* head;
     Node* tail;
 } List;
 
 List* createList();  // создать список
-void pushToList(List* list, Contact contact);    // добавить в начало
+void pushToList(List* list, Contact contact);    // добавить элемент с сохранением порядка
 int deleteFromListById(List* list, int id);   // удалить из списка
 Contact* findById(const List* list, int id);    // найти в списке по id
-void printList(List* list);
-
