@@ -59,7 +59,7 @@ int deleteFromListById(List *list, int id) {
     if (list->head->value.id == id) {
         Node* toDelete = list->head;
         list->head = toDelete->next;
-        list->head->prev = NULL;
+        if (list->head != NULL )list->head->prev = NULL;
         free(toDelete);
         list->size--;
         return 0;
@@ -67,7 +67,7 @@ int deleteFromListById(List *list, int id) {
     if (list->tail->value.id == id) {
         Node* toDelete = list->tail;
         list->tail= toDelete->prev;
-        list->tail->next = NULL;
+        if (list->tail != NULL )list->tail->next = NULL;
         free(toDelete);
         list->size--;
         return 0;
