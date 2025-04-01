@@ -56,10 +56,11 @@ void pushToList(List *list, Contact contact) {
 
 // Удалить элемент из списка по id
 int deleteFromListById(List *list, int id) {
+    if (list->size == 0) return -1;
     if (list->head->value.id == id) {
         Node* toDelete = list->head;
         list->head = toDelete->next;
-        if (list->head != NULL )list->head->prev = NULL;
+        if (list->head != NULL ) list->head->prev = NULL;
         free(toDelete);
         list->size--;
         return 0;
@@ -67,7 +68,7 @@ int deleteFromListById(List *list, int id) {
     if (list->tail->value.id == id) {
         Node* toDelete = list->tail;
         list->tail= toDelete->prev;
-        if (list->tail != NULL )list->tail->next = NULL;
+        if (list->tail != NULL ) list->tail->next = NULL;
         free(toDelete);
         list->size--;
         return 0;
