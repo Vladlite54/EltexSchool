@@ -107,7 +107,11 @@ int main(int argc, char *argv[]) {
     printf("\n");
 
     for (int i = 0; i < num_packets; i++) {
-        uint32_t destination_ip_long = rand() | (rand() << 15) | (rand() << 30);
+        uint32_t octet1 = rand() % 256;
+        uint32_t octet2 = rand() % 256;
+        uint32_t octet3 = rand() % 256;
+        uint32_t octet4 = rand() % 256;
+        uint32_t destination_ip_long = (octet1 << 24) | (octet2 << 16) | (octet3 << 8) | octet4;
 
         IPv4Address destination_ip;
         uint32_to_ipv4(destination_ip_long, &destination_ip);
