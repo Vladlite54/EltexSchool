@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//  разность
+//  СЂР°Р·РЅРѕСЃС‚СЊ
 double* substract(double num1, double num2, double* result) {
     *result = num1 - num2;
     return result;
