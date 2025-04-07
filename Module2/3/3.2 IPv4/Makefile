@@ -1,4 +1,4 @@
-TARGET=ChmodSim
+TARGET=CountPackeges
 
 $(TARGET) : Main.o
 	gcc -g Main.o -o $(TARGET)
