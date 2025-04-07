@@ -11,5 +11,11 @@ main.o : ./src/main.c
 Menu.o : $(MENU)
 	gcc -g -c $(MENU) -o Menu.o
 
+buildLibs:
+	gcc -g -c $(LIB)/Contact.c -o $(LIB)/Contact.o
+	gcc -g -c $(LIB)/List.c -o $(LIB)/List.o
+	ar r $(LIB)/libcontactlist.a $(LIB)/*.o
+	rm -rf $(LIB)/*.o
+
 clean : 
 	rm -rf *.o $(TARGET)
