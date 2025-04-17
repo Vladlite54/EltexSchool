@@ -15,9 +15,11 @@ void commandHandler(char** args) {
     if (pid == -1) {
         perror("Error!\n");
         exit(EXIT_FAILURE);
-    } else if (pid == 0) {
+    } 
+    else if (pid == 0) {
         execvp(args[0], args);
-    } else {
+    } 
+    else {
         wait(NULL);
     }
 }
