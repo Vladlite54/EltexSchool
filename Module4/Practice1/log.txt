@@ -1,0 +1,252 @@
+---ROUTER---
+
+PC1> ip 192.168.1.10 255.255.255.0 192.168.1.1
+
+PC2> ip 192.168.2.10 255.255.255.0 192.168.2.1
+
+R1(config)#interface FastEthernet0/0
+R1(config-if)#ip address 192.168.1.1 255.255.255.0
+R1(config-if)#no shutdown
+
+R1(config)#interface FastEthernet1/0
+R1(config-if)#ip address 192.168.2.1 255.255.255.0
+R1(config-if)#no shutdown
+
+R1(config)#ip routing
+
+PC1> ping 192.168.2.10
+84 bytes from 192.168.2.10 icmp_seq=1 ttl=63 time=16.893 ms
+84 bytes from 192.168.2.10 icmp_seq=2 ttl=63 time=14.767 ms
+84 bytes from 192.168.2.10 icmp_seq=3 ttl=63 time=16.000 ms
+84 bytes from 192.168.2.10 icmp_seq=4 ttl=63 time=14.879 ms
+84 bytes from 192.168.2.10 icmp_seq=5 ttl=63 time=14.933 ms
+
+Link1:
+arp:
+141	1117.857714	00:50:79:66:68:01	Broadcast	ARP	64	Who has 192.168.1.1? Tell 192.168.1.10
+Frame 141: 64 bytes on wire (512 bits), 64 bytes captured (512 bits) on interface -, id 0
+Ethernet II, Src: 00:50:79:66:68:01 (00:50:79:66:68:01), Dst: Broadcast (ff:ff:ff:ff:ff:ff)
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: 00:50:79:66:68:01 (00:50:79:66:68:01)
+    Sender IP address: 192.168.1.10
+    Target MAC address: Broadcast (ff:ff:ff:ff:ff:ff)
+    Target IP address: 192.168.1.1
+
+142	1117.861820	cc:01:3b:69:00:00	00:50:79:66:68:01	ARP	60	192.168.1.1 is at cc:01:3b:69:00:00
+Frame 142: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface -, id 0
+Ethernet II, Src: cc:01:3b:69:00:00 (cc:01:3b:69:00:00), Dst: 00:50:79:66:68:01 (00:50:79:66:68:01)
+Address Resolution Protocol (reply)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: reply (2)
+    Sender MAC address: cc:01:3b:69:00:00 (cc:01:3b:69:00:00)
+    Sender IP address: 192.168.1.1
+    Target MAC address: 00:50:79:66:68:01 (00:50:79:66:68:01)
+    Target IP address: 192.168.1.10
+icmp:
+105	898.575001	192.168.1.10	192.168.2.10	ICMP	98	Echo (ping) request  id=0xa4dd, seq=1/256, ttl=64 (reply in 106)
+Frame 105: 98 bytes on wire (784 bits), 98 bytes captured (784 bits) on interface -, id 0
+Ethernet II, Src: 00:50:79:66:68:01 (00:50:79:66:68:01), Dst: cc:01:3b:69:00:00 (cc:01:3b:69:00:00)
+Internet Protocol Version 4, Src: 192.168.1.10, Dst: 192.168.2.10
+Internet Control Message Protocol
+    Type: 8 (Echo (ping) request)
+    Code: 0
+    Checksum: 0x7b2d [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 42205 (0xa4dd)
+    Identifier (LE): 56740 (0xdda4)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Response frame: 106]
+    Data (56 bytes)
+
+106	898.605054	192.168.2.10	192.168.1.10	ICMP	98	Echo (ping) reply    id=0xa4dd, seq=1/256, ttl=63 (request in 105)
+Internet Control Message Protocol
+    Type: 0 (Echo (ping) reply)
+    Code: 0
+    Checksum: 0x832d [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 42205 (0xa4dd)
+    Identifier (LE): 56740 (0xdda4)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Request frame: 105]
+    [Response time: 30,053 ms]
+    Data (56 bytes)
+
+Link2:
+arp:
+5	21.875003	cc:01:3b:69:00:10	00:50:79:66:68:00	ARP	60	192.168.2.1 is at cc:01:3b:69:00:10
+Address Resolution Protocol (reply)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: reply (2)
+    Sender MAC address: cc:01:3b:69:00:10 (cc:01:3b:69:00:10)
+    Sender IP address: 192.168.2.1
+    Target MAC address: 00:50:79:66:68:00 (00:50:79:66:68:00)
+    Target IP address: 192.168.2.10
+
+4	21.871124	00:50:79:66:68:00	Broadcast	ARP	64	Who has 192.168.2.1? Tell 192.168.2.10
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: 00:50:79:66:68:00 (00:50:79:66:68:00)
+    Sender IP address: 192.168.2.10
+    Target MAC address: Broadcast (ff:ff:ff:ff:ff:ff)
+    Target IP address: 192.168.2.1
+
+icmp:
+6	21.875373	192.168.2.10	192.168.1.10	ICMP	98	Echo (ping) request  id=0x07e2, seq=1/256, ttl=64 (reply in 7)
+Internet Control Message Protocol
+    Type: 8 (Echo (ping) request)
+    Code: 0
+    Checksum: 0x1829 [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 2018 (0x07e2)
+    Identifier (LE): 57863 (0xe207)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Response frame: 7]
+    Data (56 bytes)
+7	21.905237	192.168.1.10	192.168.2.10	ICMP	98	Echo (ping) reply    id=0x07e2, seq=1/256, ttl=63 (request in 6)
+Internet Control Message Protocol
+    Type: 0 (Echo (ping) reply)
+    Code: 0
+    Checksum: 0x2029 [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 2018 (0x07e2)
+    Identifier (LE): 57863 (0xe207)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Request frame: 6]
+    [Response time: 29,864 ms]
+    Data (56 bytes)
+
+---SWITCH---
+
+PC3> ip 192.168.3.10 255.255.255.0
+PC3> ping 192.168.3.20
+
+PC4> ip 192.168.3.20 255.255.255.0
+PC4> ping 192.168.3.10
+
+Link1:
+arp:
+1	0.000000	00:50:79:66:68:02	Broadcast	ARP	64	Who has 192.168.3.20? Tell 192.168.3.10
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: 00:50:79:66:68:02 (00:50:79:66:68:02)
+    Sender IP address: 192.168.3.10
+    Target MAC address: Broadcast (ff:ff:ff:ff:ff:ff)
+    Target IP address: 192.168.3.20
+
+2	0.000139	00:50:79:66:68:03	00:50:79:66:68:02	ARP	64	192.168.3.20 is at 00:50:79:66:68:03
+Address Resolution Protocol (reply)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: reply (2)
+    Sender MAC address: 00:50:79:66:68:03 (00:50:79:66:68:03)
+    Sender IP address: 192.168.3.20
+    Target MAC address: 00:50:79:66:68:02 (00:50:79:66:68:02)
+    Target IP address: 192.168.3.10
+icmp:
+3	0.001000	192.168.3.10	192.168.3.20	ICMP	98	Echo (ping) request  id=0xf5ec, seq=1/256, ttl=64 (reply in 4)
+Internet Control Message Protocol
+    Type: 8 (Echo (ping) request)
+    Code: 0
+    Checksum: 0x2a1e [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 62956 (0xf5ec)
+    Identifier (LE): 60661 (0xecf5)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Response frame: 4]
+    Data (56 bytes)
+4	0.001113	192.168.3.20	192.168.3.10	ICMP	98	Echo (ping) reply    id=0xf5ec, seq=1/256, ttl=64 (request in 3)
+Internet Control Message Protocol
+    Type: 0 (Echo (ping) reply)
+    Code: 0
+    Checksum: 0x321e [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 62956 (0xf5ec)
+    Identifier (LE): 60661 (0xecf5)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Request frame: 3]
+    [Response time: 0,113 ms]
+    Data (56 bytes)
+
+Link2:
+arp:
+1	0.000000	00:50:79:66:68:03	Broadcast	ARP	64	Who has 192.168.3.10? Tell 192.168.3.20
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: 00:50:79:66:68:03 (00:50:79:66:68:03)
+    Sender IP address: 192.168.3.20
+    Target MAC address: Broadcast (ff:ff:ff:ff:ff:ff)
+    Target IP address: 192.168.3.10
+
+2	0.000142	00:50:79:66:68:02	00:50:79:66:68:03	ARP	64	192.168.3.10 is at 00:50:79:66:68:02
+Frame 2: 64 bytes on wire (512 bits), 64 bytes captured (512 bits) on interface -, id 0
+Ethernet II, Src: 00:50:79:66:68:02 (00:50:79:66:68:02), Dst: 00:50:79:66:68:03 (00:50:79:66:68:03)
+Address Resolution Protocol (reply)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: reply (2)
+    Sender MAC address: 00:50:79:66:68:02 (00:50:79:66:68:02)
+    Sender IP address: 192.168.3.10
+    Target MAC address: 00:50:79:66:68:03 (00:50:79:66:68:03)
+    Target IP address: 192.168.3.20
+icmp:
+3	0.001041	192.168.3.20	192.168.3.10	ICMP	98	Echo (ping) request  id=0x1cee, seq=1/256, ttl=64 (reply in 4)
+Internet Control Message Protocol
+    Type: 8 (Echo (ping) request)
+    Code: 0
+    Checksum: 0x031d [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 7406 (0x1cee)
+    Identifier (LE): 60956 (0xee1c)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Response frame: 4]
+    Data (56 bytes)
+
+4	0.001141	192.168.3.10	192.168.3.20	ICMP	98	Echo (ping) reply    id=0x1cee, seq=1/256, ttl=64 (request in 3)
+Internet Control Message Protocol
+    Type: 0 (Echo (ping) reply)
+    Code: 0
+    Checksum: 0x0b1d [correct]
+    [Checksum Status: Good]
+    Identifier (BE): 7406 (0x1cee)
+    Identifier (LE): 60956 (0xee1c)
+    Sequence Number (BE): 1 (0x0001)
+    Sequence Number (LE): 256 (0x0100)
+    [Request frame: 3]
+    [Response time: 0,100 ms]
+    Data (56 bytes)
+
+
