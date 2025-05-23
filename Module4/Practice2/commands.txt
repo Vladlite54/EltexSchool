@@ -1,0 +1,34 @@
+VPCS1> ip 192.168.1.10/24
+VPCS2> ip 192.168.1.20/24
+VPCS3> ip 192.168.1.30/24
+VPCS4> ip 192.168.1.40/24
+VPCS5> ip 192.168.1.50/24
+VPCS6> ip 192.168.1.60/24
+
+----Switch1----
+enable
+configure terminal
+spanning-tree vlan 1 priority 4096
+end
+
+----Switch2----
+enable
+configure terminal
+spanning-tree vlan 1 priority 8192
+end
+
+----Switch 1-6----
+enable
+show spanning-tree
+
+----Switch3----
+config t
+interface Gi0/0
+spanning-tree cost 30
+end
+
+
+show running-config
+
+
+
