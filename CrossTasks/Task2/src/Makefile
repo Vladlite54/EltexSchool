@@ -1,7 +1,7 @@
-TARGET=CLI
+TARGET=Taxi
 
 all:
-	gcc -g $(TARGET).c -o $(TARGET) -lrt
+	gcc -g CLI.c -o $(TARGET)
 	gcc -g Driver.c -o Driver
 
 clean:

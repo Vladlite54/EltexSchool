@@ -234,12 +234,18 @@ void command_handler(const char *command) {
     else if (strncmp(command, "get_status", 10) == 0) {
         if (sscanf(command, "%*s %d", &pid) == 1) {
             get_status(pid);
+        }
+        else {
+            printf("Incorrect usage! Try get_status <pid>\n");
         };
     }
     else if (strncmp(command, "send_task", 9) == 0) {
         if (sscanf(command, "%*s %d %d", &pid, &time_sec) == 2) {
             send_task(pid, time_sec);
         }
+        else {
+            printf("Incorrect usage! Try send_task <pid> <timer>\n");
+        };
     }
     else if (strcmp(command, "get_drivers") == 0) {
         get_drivers();
